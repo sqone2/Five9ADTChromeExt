@@ -20,6 +20,25 @@ survives extension service-worker suspension but resets when the extension is
 reloaded or Chrome restarts. Reloading the extension while ADT is open clears
 its tracking; close that ADT window before launching again to avoid duplicates.
 
+## Chrome Web Store package
+
+Run from this directory:
+
+```sh
+mkdir -p dist
+version=$(node -p "require('./manifest.json').version")
+zip -X "dist/five9-adt-$version.zip" manifest.json \
+  background.js click-to-dial-background.js five9.crm.sdk.js \
+  settings.js screen-pop.js phone-numbers.js adt-dial.js click-to-dial.js \
+  options.html options.css options.js \
+  assets/toolbar16.png assets/toolbar32.png assets/icon128.png
+```
+
+Upload `dist/five9-adt-<version>.zip` to the Chrome Web Store Developer Dashboard.
+The filename uses the version from `manifest.json` so releases can be tracked.
+The ZIP contains only runtime files, with `manifest.json` at its root.
+The `dist/` directory is ignored by Git.
+
 ## Options
 
 Right-click the extension toolbar icon and choose **Options** (or open
@@ -84,6 +103,9 @@ destinations you trust: substituted CAV values are sent to that site in the URL.
   and telephony within its website.
 - Does not replace any Five9-required softphone or connectivity extension.
 - This is a custom launcher, not an official Five9 extension.
+
+See the [privacy policy](PRIVACY.md) for data handling, local diagnostics,
+third-party transfers, and user controls.
 
 CRM and Hook API flags are omitted from the default URL: the Interaction API
 provides both call events and click-to-dial.
