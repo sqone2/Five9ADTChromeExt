@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Five9 ADT",
+  "version": "0.1.22",
+  "description": "Open Five9 ADT in an independent window, or focus the existing window.",
+  "icons": {
+    "16": "assets/toolbar16.png",
+    "32": "assets/toolbar32.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Open Five9 ADT",
+    "default_icon": {
+      "16": "assets/toolbar16.png",
+      "32": "assets/toolbar32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.five9.com/clients/integrations/adt.main.html*",
+        "https://app.five9.eu/clients/integrations/adt.main.html*"
+      ],
+      "js": ["five9.crm.sdk.js", "settings.js", "screen-pop.js", "phone-numbers.js", "adt-dial.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": ["*://*.five9.com/*", "*://*.five9.net/*", "*://*.five9.eu/*"],
+      "js": ["phone-numbers.js", "click-to-dial.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

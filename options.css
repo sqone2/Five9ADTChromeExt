@@ -1,0 +1,55 @@
+:root {
+  color-scheme: light;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  color: #202734;
+  background: #f7f8fa;
+}
+* { box-sizing: border-box; }
+body { margin: 0; border-top: 4px solid #304ffe; }
+main { width: min(100%, 720px); margin: 40px auto; padding: 0 24px; }
+header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+h1 { margin: 0; font-size: 24px; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+legend { padding: 0; font-size: 18px; font-weight: 700; }
+p { color: #596372; font-size: 14px; line-height: 1.5; }
+.dimensions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.field { margin-top: 20px; }
+.field-heading { position: relative; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+label { font-size: 14px; font-weight: 600; }
+input {
+  width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px;
+  border: 1px solid #aeb6c3; border-radius: 6px; background: #fff;
+  color: inherit; font: inherit; font-size: 16px;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.checkbox { display: flex; align-items: center; gap: 10px; }
+input[type="checkbox"] { width: 20px; min-height: 20px; height: 20px; flex-shrink: 0; margin: 0; }
+button {
+  min-height: 44px; padding: 10px 16px; border: 1px solid #aeb6c3;
+  border-radius: 6px; background: #fff; color: inherit; font: inherit;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+button[type="submit"] { background: #304ffe; border-color: #304ffe; color: #fff; }
+button:disabled, fieldset:disabled { opacity: 0.6; }
+button.info {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; min-height: 22px; padding: 0; border-radius: 50%;
+  color: #304ffe; font-family: Georgia, serif; font-style: italic;
+}
+.help { display: inline-flex; flex-shrink: 0; }
+.tooltip {
+  position: absolute; z-index: 10; top: 100%; left: 0;
+  width: min(400px, 100%); padding: 12px 14px;
+  border-radius: 6px; background: #202734; color: #fff;
+  font-size: 13px; font-weight: 400; line-height: 1.5; overflow-wrap: anywhere;
+  box-shadow: 0 4px 16px #0003; visibility: hidden; opacity: 0;
+}
+.help:hover .tooltip, .help:focus-within .tooltip { visibility: visible; opacity: 1; }
+.help[data-dismissed="true"] .tooltip { visibility: hidden; opacity: 0; }
+:focus-visible { outline: 3px solid #00826c; outline-offset: 3px; }
+#status { min-height: 24px; }
+#status[data-error="true"] { color: #ac2430; }
+@media (max-width: 420px) {
+  main { margin-top: 24px; padding: 0 16px; }
+  .dimensions { grid-template-columns: 1fr; gap: 0; }
+}
